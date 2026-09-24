@@ -2,6 +2,7 @@ package com.example.adithia_3tie
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        Log.e("onCreate", "MainActivity dibuat pertama kali")
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -23,7 +27,20 @@ class MainActivity : AppCompatActivity() {
         val btnToFourth = findViewById<Button>(R.id.btnToFourth)
         btnToFourth.setOnClickListener {
             val intent = Intent(this, FourthActivity::class.java)
+            intent.putExtra("name", "Politeknik Caltex Riau")
+            intent.putExtra("from", "Rumbai")
+            intent.putExtra("age", 25)
             startActivity(intent)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.e("onStart", "onStart: MainActivity terlihat di layar")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e("onDestroy", "MainActivity dihapus dari stack")
     }
 }
